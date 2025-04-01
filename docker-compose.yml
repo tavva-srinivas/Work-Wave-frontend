@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    image: jarviss77/se-project:backend
+    ports:
+      - "4000:4000"
+
+  frontend:
+    image: jarviss77/se-project:v1
+    ports:
+      - "3000:3000"
+    depends_on:
+        - backend
+
+  server:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+        - backend
